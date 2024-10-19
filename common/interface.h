@@ -23,7 +23,9 @@
 
 #if !defined( _WIN32 )
 
-#include <dlfcn.h> // dlopen,dlclose, et al
+#ifndef __3DS__
+	#include <dlfcn.h> // dlopen,dlclose, et al
+#endif
 #include <unistd.h>
 
 #define HMODULE        void *

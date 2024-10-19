@@ -25,7 +25,11 @@ GNU General Public License for more details.
 
 #ifndef _WIN32
     #include <limits.h>
-    #include <dlfcn.h>
+    #if !defined(__3DS__)
+		#include <dlfcn.h>
+	#else
+		#define RTLD_NOW 0
+	#endif
 
     #ifdef __APPLE__
 		#include <sys/syslimits.h>

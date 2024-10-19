@@ -510,3 +510,80 @@ public:
 
 EXPOSE_SINGLE_INTERFACE(CClientExports, IGameClientExports, GAMECLIENTEXPORTS_INTERFACE_VERSION)
 
+#ifdef __3DS__
+
+//===============================
+// exports for 3ds dlsym()
+//===============================
+
+extern "C"
+{
+typedef struct dllexport_s
+{
+	const char *name;
+	void *func;
+} dllexport_t;
+
+void DLLEXPORT IN_ClientMoveEvent( float forwardmove, float sidemove );
+void DLLEXPORT IN_ClientLookEvent( float relyaw, float relpitch );
+void DLLEXPORT IN_ActivateMouse_CL( void );
+void DLLEXPORT IN_DeactivateMouse_CL( void );
+void DLLEXPORT IN_MouseEvent_CL( int mstate );
+void DLLEXPORT V_CalcRefdef_CL( struct ref_params_s *pparams );
+
+dllexport_t ctr_client_exports[] = {
+	{ "Initialize", (void*)Initialize },
+	{ "HUD_VidInit", (void*)HUD_VidInit },
+	{ "HUD_Init", (void*)HUD_Init },
+	{ "HUD_Shutdown", (void*)HUD_Shutdown },
+	{ "HUD_Redraw", (void*)HUD_Redraw },
+	{ "HUD_UpdateClientData", (void*)HUD_UpdateClientData },
+	{ "HUD_Reset", (void*)HUD_Reset },
+	{ "HUD_PlayerMove", (void*)HUD_PlayerMove },
+	{ "HUD_PlayerMoveInit", (void*)HUD_PlayerMoveInit },
+	{ "HUD_PlayerMoveTexture", (void*)HUD_PlayerMoveTexture },
+	{ "HUD_ConnectionlessPacket", (void*)HUD_ConnectionlessPacket },
+	{ "HUD_GetHullBounds", (void*)HUD_GetHullBounds },
+	{ "HUD_Frame", (void*)HUD_Frame },
+	{ "HUD_PostRunCmd", (void*)HUD_PostRunCmd },
+	{ "HUD_Key_Event", (void*)HUD_Key_Event },
+	{ "HUD_AddEntity", (void*)HUD_AddEntity },
+	{ "HUD_CreateEntities", (void*)HUD_CreateEntities },
+	{ "HUD_StudioEvent", (void*)HUD_StudioEvent },
+	{ "HUD_TxferLocalOverrides", (void*)HUD_TxferLocalOverrides },
+	{ "HUD_ProcessPlayerState", (void*)HUD_ProcessPlayerState },
+	{ "HUD_TxferPredictionData", (void*)HUD_TxferPredictionData },
+	{ "HUD_TempEntUpdate", (void*)HUD_TempEntUpdate },
+	{ "HUD_DrawNormalTriangles", (void*)HUD_DrawNormalTriangles },
+	{ "HUD_DrawTransparentTriangles", (void*)HUD_DrawTransparentTriangles },
+	{ "HUD_GetUserEntity", (void*)HUD_GetUserEntity },
+	{ "Demo_ReadBuffer", (void*)Demo_ReadBuffer },
+	{ "CAM_Think", (void*)CAM_Think },
+	{ "CL_IsThirdPerson", (void*)CL_IsThirdPerson },
+	{ "CL_CameraOffset", (void*)CL_CameraOffset },
+	{ "CL_CreateMove", (void*)CL_CreateMove },
+	{ "IN_ActivateMouse", (void*)IN_ActivateMouse_CL },
+	{ "IN_DeactivateMouse", (void*)IN_DeactivateMouse_CL },
+	{ "IN_MouseEvent", (void*)IN_MouseEvent_CL },
+	{ "IN_Accumulate", (void*)IN_Accumulate },
+	{ "IN_ClearStates", (void*)IN_ClearStates },
+	{ "V_CalcRefdef", (void*)V_CalcRefdef_CL },
+	{ "KB_Find", (void*)KB_Find },
+	{ "HUD_GetStudioModelInterface", (void*)HUD_GetStudioModelInterface },
+	{ "HUD_DirectorMessage", (void*)HUD_DirectorMessage },
+	{ "HUD_VoiceStatus", (void*)HUD_VoiceStatus },
+	{ "IN_ClientMoveEvent", (void*)IN_ClientMoveEvent}, // Xash3D ext
+	{ "IN_ClientLookEvent", (void*)IN_ClientLookEvent}, // Xash3D ext
+	{ NULL, NULL },
+};
+
+int dll_register( const char *name, dllexport_t *exports );
+
+int ctr_installdll_client( void )
+{
+	return dll_register( "client", ctr_client_exports );
+}
+
+}
+
+#endif
