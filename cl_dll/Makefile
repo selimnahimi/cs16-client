@@ -103,6 +103,7 @@ SRCS+=./hud/spectator_gui.cpp
 SRCS+=./hud/timer.cpp
 #SRCS+=./input/input_sdl.cpp
 SRCS+=./input/input_xash3d.cpp
+SRCS+=./input/input_mouse.cpp
 SRCS+=./VGUI/backgroundpanel.cpp
 SRCS+=./VGUI/basecareermenu.cpp
 SRCS+=./VGUI/buymenu.cpp
@@ -157,9 +158,15 @@ SRCS+=../pm_shared/pm_debug.cpp
 SRCS+=../pm_shared/pm_math.cpp
 SRCS+=../pm_shared/pm_shared.cpp
 
+# Miniutl
+SRCS+=../../mainui_3ds/miniutl/bitstring.cpp
+SRCS+=../../mainui_3ds/miniutl/generichash.cpp
+SRCS+=../../mainui_3ds/miniutl/utlbuffer.cpp
+SRCS+=../../mainui_3ds/miniutl/strtools.cpp
+
 OBJS = $(SRCS:.cpp=.o) $(SRCS_C:.c=.o)
 
-INCLUDES = -I. -I./include -I./include/hud -I./include/math -I./include/studio -I./VGUI -I../dlls \
+INCLUDES = -I. -I./include -I./include/hud -I./include/math -I./include/studio -I./VGUI -I./input -I../dlls \
 	-I../cl_dll \
 	-I../common \
 	-I../engine \

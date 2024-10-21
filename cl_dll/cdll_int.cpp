@@ -526,9 +526,9 @@ typedef struct dllexport_s
 
 void DLLEXPORT IN_ClientMoveEvent( float forwardmove, float sidemove );
 void DLLEXPORT IN_ClientLookEvent( float relyaw, float relpitch );
+void DLLEXPORT IN_MouseEvent_CL( int mstate );
 void DLLEXPORT IN_ActivateMouse_CL( void );
 void DLLEXPORT IN_DeactivateMouse_CL( void );
-void DLLEXPORT IN_MouseEvent_CL( int mstate );
 void DLLEXPORT V_CalcRefdef_CL( struct ref_params_s *pparams );
 
 dllexport_t ctr_client_exports[] = {
