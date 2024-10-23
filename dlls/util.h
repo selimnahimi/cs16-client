@@ -28,24 +28,6 @@
 
 #include <tier1/UtlVector.h>
 
-//
-// Misc utility code
-//
-
-// HACK: this enables us to have two different symbols for this shit in
-// server and client static libs, eliminating linking conflicts without effort
-#ifdef _3DS
-#ifdef CLIENT_DLL
-#define gpGlobals cl_gpGlobals
-#define g_engfuncs g_cl_engfuncs
-#define g_physfuncs g_cl_physfuncs
-#else
-#define gpGlobals sv_gpGlobals
-#define g_engfuncs g_sv_engfuncs
-#define g_physfuncs g_sv_physfuncs
-#endif
-#endif
-
 inline void MESSAGE_BEGIN(int msg_dest, int msg_type, const float *pOrigin, entvars_t *ent);
 extern globalvars_t *gpGlobals;
 
@@ -197,7 +179,6 @@ extern float UTIL_AngleMod(float a);
 extern float UTIL_AngleDiff(float destAngle, float srcAngle);
 
 extern CBaseEntity *UTIL_FindEntityInSphere(CBaseEntity *pStartEntity, const Vector &vecCenter, float flRadius);
-extern CBaseEntity *UTIL_FindEntityByString_Old(CBaseEntity *pStartEntity, const char *szKeyword, const char *szValue);
 extern CBaseEntity *UTIL_FindEntityByString(CBaseEntity *pStartEntity, const char *szKeyword, const char *szValue);
 #ifndef CLIENT_DLL
 extern CBaseEntity *UTIL_FindEntityByClassname(CBaseEntity *pStartEntity, const char *szName);

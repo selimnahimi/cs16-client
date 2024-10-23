@@ -163,6 +163,7 @@ SRCS+=../../mainui_3ds/miniutl/bitstring.cpp
 SRCS+=../../mainui_3ds/miniutl/generichash.cpp
 SRCS+=../../mainui_3ds/miniutl/utlbuffer.cpp
 SRCS+=../../mainui_3ds/miniutl/strtools.cpp
+SRCS+=../../mainui_3ds/miniutl/utlmemory.cpp
 
 OBJS = $(SRCS:.cpp=.o) $(SRCS_C:.c=.o)
 
