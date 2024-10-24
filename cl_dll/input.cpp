@@ -31,7 +31,11 @@ extern int g_weaponselect;
 extern cl_enginefunc_t gEngfuncs;
 
 // Defined in pm_math.c
+#ifndef __3DS__
 float anglemod( float a );
+#else
+extern "C" float anglemod( float a );
+#endif
 
 void IN_Init (void);
 void IN_Move ( float frametime, usercmd_t *cmd);

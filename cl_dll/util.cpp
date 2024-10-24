@@ -30,9 +30,11 @@
 #define M_PI		3.14159265358979323846	// matches value in gcc v2 math.h
 #endif
 
-//vec3_t vec3_origin( 0, 0, 0 );
+#ifdef __3DS__
+// vec3_t vec3_origin( 0, 0, 0 );
 
-//double sqrt(double x);
+double sqrt(double x);
+#endif
 
 float rsqrt( float number )
 {
@@ -84,3 +86,34 @@ float *GetClientColor( int clientIndex )
 	default:              return g_ColorGrey;
 	}
 }
+
+#ifdef __3DS__
+void VectorAngles( const float *forward, float *angles )
+{
+	float tmp, yaw, pitch;
+
+	if( forward[1] == 0 && forward[0] == 0 )
+	{
+		yaw = 0;
+		if( forward[2] > 0 )
+			pitch = 90;
+		else
+			pitch = 270;
+	}
+	else
+	{
+		yaw = ( atan2( forward[1], forward[0]) * 180 / M_PI );
+		if( yaw < 0 )
+			yaw += 360;
+
+		tmp = sqrt( forward[0] * forward[0] + forward[1] * forward[1] );
+		pitch = ( atan2( forward[2], tmp ) * 180 / M_PI );
+		if( pitch < 0 )
+			pitch += 360;
+	}
+
+	angles[0] = pitch;
+	angles[1] = yaw;
+	angles[2] = 0;
+}
+#endif

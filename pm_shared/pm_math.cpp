@@ -4,9 +4,14 @@
 /*
 * Globals initialization
 */
+#ifndef __3DS__
 float vec3_origin[] = {0, 0, 0};
+#endif
+
 int nanmask = 255<<23;
 
+
+#ifndef __3DS__
 float anglemod(float a)
 {
 	a = (360.0 / 65536) * ((int)(a  *(65536 / 360.0)) & 65535);
@@ -51,6 +56,9 @@ void AngleVectors(const vec_t *angles, vec_t *forward, vec_t *right, vec_t *up)
 		up[2] = cr * cp;
 	}
 }
+#else
+float anglemod( float a );
+#endif
 
 void AngleVectorsTranspose(const vec_t *angles, vec_t *forward, vec_t *right, vec_t *up)
 {
@@ -172,6 +180,7 @@ void NormalizeAngles(float *angles)
 // FIXME:  Use Quaternions to avoid discontinuities
 // Frac is 0.0 to 1.0 (i.e., should probably be clamped, but doesn't have to be)
 
+#ifndef __3DS__
 void InterpolateAngles(float *start, float *end, float *output, float frac)
 {
 	int i;
@@ -201,6 +210,7 @@ void InterpolateAngles(float *start, float *end, float *output, float frac)
 
 	NormalizeAngles(output);
 }
+#endif
 
 float AngleBetweenVectors(const vec_t *v1, const vec_t *v2)
 {
@@ -362,6 +372,7 @@ void VectorMatrix(vec_t *forward, vec_t *right, vec_t *up)
 	VectorNormalize(up);
 }
 
+#ifndef __3DS__
 void VectorAngles(const vec_t *forward, vec_t *angles)
 {
 	float tmp, yaw, pitch;
@@ -390,3 +401,4 @@ void VectorAngles(const vec_t *forward, vec_t *angles)
 	angles[1] = yaw;
 	angles[2] = 0;
 }
+#endif
